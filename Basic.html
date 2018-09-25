@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+    <meta 
+     name='viewport' 
+      content='width=50px, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,' 
+     /> 
+  <title>Die Plättchen-App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+  <!-- 
+
+Created by Melanie Platz
+
+Refernces:
+* https://openclipart.org/
+* https://wiki.selfhtml.org/wiki/JavaScript/Tutorials/Drag_and_Drop
+* https://mobiforge.com/design-development/touch-friendly-drag-and-drop
+* https://stackoverflow.com/questions/50801496/how-to-move-an-drag-and-drop-item-to-a-certain-position-when-located-over-canva
+-->
+
+<style> 
+
+#refreshBtn {
+  width: 70px;
+  height: 77px;
+  left:0px;
+  top:0px;
+  background: url("refresh.png");
+}
+
+container1 {
+  width: 150px;
+  height: 121px;
+  position: absolute;
+  background: url("Box_red.png");
+  top: 0px;
+  left: 220px;
+}
+
+container2 {
+  width: 150px;
+  height: 121px;
+  position: absolute;
+  background: url("Box_blue.png");
+  top: 0px;
+  left: 70px;
+}
+  
+body {
+  position: relative;
+}
+
+div1 {
+  position: absolute;
+  top: 40px;
+  left: 230px;
+  height: 72px;
+  width: 72px;
+  background: url("plaettchen_rot.png");
+  border: 0px solid #666;
+  margin: 0;
+  padding: 0;
+}
+
+div2 {
+  position: absolute;
+  top: 40px;
+  left: 80px;
+  height: 72px;
+  width: 72px;
+  background: url("plaettchen_blau.png");
+  border: 0px solid #666;
+  margin: 0;
+  padding: 0;
+}
+
+
+</style>  
+  <title>Clean up</title>
+</head>
+
+<body>
+
+<div id="refreshBtn" onClick="window.location.href=window.location.href"></div>
+
+<container1 id="container1-1"></container1> 
+<container1 id="container1-2"></container1> 
+<container1 id="container1-3"></container1> 
+<container1 id="container1-4"></container1> 
+<container1 id="container1-5"></container1> 
+<container1 id="container1-6"></container1> 
+<container1 id="container1-7"></container1> 
+<container1 id="container1-8"></container1>
+<container1 id="container1-9"></container1> 
+<container1 id="container1-10"></container1> 
+<container1 id="container1-11"></container1> 
+<container1 id="container1-12"></container1> 
+<container1 id="container1-13"></container1> 
+<container1 id="container1-14"></container1> 
+<container1 id="container1-15"></container1> 
+<container1 id="container1-16"></container1> 
+<container1 id="container1-17"></container1> 
+<container1 id="container1-18"></container1>
+<container1 id="container1-19"></container1> 
+<container1 id="container1-20"></container1>
+
+<container2 id="container2-1"></container2> 
+<container2 id="container2-2"></container2> 
+<container2 id="container2-3"></container2> 
+<container2 id="container2-4"></container2> 
+<container2 id="container2-5"></container2> 
+<container2 id="container2-6"></container2> 
+<container2 id="container2-7"></container2> 
+<container2 id="container2-8"></container2>
+<container2 id="container2-9"></container2> 
+<container2 id="container2-10"></container2> 
+<container2 id="container2-11"></container2> 
+<container2 id="container2-12"></container2> 
+<container2 id="container2-13"></container2> 
+<container2 id="container2-14"></container2> 
+<container2 id="container2-15"></container2> 
+<container2 id="container2-16"></container2> 
+<container2 id="container2-17"></container2> 
+<container2 id="container2-18"></container2>
+<container2 id="container2-19"></container2> 
+<container2 id="container2-20"></container2>
+
+<div1 class="draggable" id="div1-1"></div1>
+<div1 class="draggable" id="div1-2"></div1>
+<div1 class="draggable" id="div1-3"></div1>
+<div1 class="draggable" id="div1-4"></div1>
+<div1 class="draggable" id="div1-5"></div1>
+<div1 class="draggable" id="div1-6"></div1>
+<div1 class="draggable" id="div1-7"></div1>
+<div1 class="draggable" id="div1-8"></div1>
+<div1 class="draggable" id="div1-9"></div1>
+<div1 class="draggable" id="div1-10"></div1>
+<div1 class="draggable" id="div1-11"></div1>
+<div1 class="draggable" id="div1-12"></div1>
+<div1 class="draggable" id="div1-13"></div1>
+<div1 class="draggable" id="div1-14"></div1>
+<div1 class="draggable" id="div1-15"></div1>
+<div1 class="draggable" id="div1-16"></div1>
+<div1 class="draggable" id="div1-17"></div1>
+<div1 class="draggable" id="div1-18"></div1>
+<div1 class="draggable" id="div1-19"></div1>
+<div1 class="draggable" id="div1-20"></div1>
+
+<div2 class="draggable" id="div2-1"></div2>
+<div2 class="draggable" id="div2-2"></div2>
+<div2 class="draggable" id="div2-3"></div2>
+<div2 class="draggable" id="div2-4"></div2>
+<div2 class="draggable" id="div2-5"></div2>
+<div2 class="draggable" id="div2-6"></div2>
+<div2 class="draggable" id="div2-7"></div2>
+<div2 class="draggable" id="div2-8"></div2>
+<div2 class="draggable" id="div2-9"></div2>
+<div2 class="draggable" id="div2-10"></div2>
+<div2 class="draggable" id="div2-11"></div2>
+<div2 class="draggable" id="div2-12"></div2>
+<div2 class="draggable" id="div2-13"></div2>
+<div2 class="draggable" id="div2-14"></div2>
+<div2 class="draggable" id="div2-15"></div2>
+<div2 class="draggable" id="div2-16"></div2>
+<div2 class="draggable" id="div2-17"></div2>
+<div2 class="draggable" id="div2-18"></div2>
+<div2 class="draggable" id="div2-19"></div2>
+<div2 class="draggable" id="div2-20"></div2>
+ 
+ 
+<script>
+
+$(document).ready(function( event, ui ) {
+  $('#div1-1').draggable();
+  $('#container1-1').droppable({
+  accept: '#div1-1',
+    drop: function() {
+    $('#div1-1').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+ 
+$(document).ready(function( event, ui ) {
+  $('#div1-2').draggable();
+  $('#container1-2').droppable({
+  accept: '#div1-2',
+    drop: function() {
+    $('#div1-2').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-3').draggable();
+  $('#container1-3').droppable({
+  accept: '#div1-3',
+    drop: function() {
+    $('#div1-3').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-4').draggable();
+  $('#container1-4').droppable({
+  accept: '#div1-4',
+    drop: function() {
+    $('#div1-4').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-5').draggable();
+  $('#container1-5').droppable({
+  accept: '#div1-5',
+    drop: function() {
+    $('#div1-5').animate({top:"40px", left:"230px"});
+    }
+  });
+ }); 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div1-6').draggable();
+  $('#container1-6').droppable({
+  accept: '#div1-6',
+    drop: function() {
+    $('#div1-6').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-7').draggable();
+  $('#container1-7').droppable({
+  accept: '#div1-7',
+    drop: function() {
+    $('#div1-7').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-8').draggable();
+  $('#container1-8').droppable({
+  accept: '#div1-8',
+    drop: function() {
+    $('#div1-8').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-9').draggable();
+  $('#container1-9').droppable({
+  accept: '#div1-9',
+    drop: function() {
+    $('#div1-9').animate({top:"40px", left:"230px"});
+    }
+  });
+ }); 
+ 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div1-10').draggable();
+  $('#container1-10').droppable({
+  accept: '#div1-10',
+    drop: function() {
+    $('#div1-10').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+ 
+$(document).ready(function( event, ui ) {
+  $('#div1-11').draggable();
+  $('#container1-11').droppable({
+  accept: '#div1-11',
+    drop: function() {
+    $('#div1-11').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-12').draggable();
+  $('#container1-12').droppable({
+  accept: '#div1-12',
+    drop: function() {
+    $('#div1-12').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-13').draggable();
+  $('#container1-13').droppable({
+  accept: '#div1-13',
+    drop: function() {
+    $('#div1-13').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-14').draggable();
+  $('#container1-14').droppable({
+  accept: '#div1-14',
+    drop: function() {
+    $('#div1-14').animate({top:"40px", left:"230px"});
+    }
+  });
+ }); 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div1-15').draggable();
+  $('#container1-15').droppable({
+  accept: '#div1-15',
+    drop: function() {
+    $('#div1-15').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-16').draggable();
+  $('#container1-16').droppable({
+  accept: '#div1-16',
+    drop: function() {
+    $('#div1-16').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-17').draggable();
+  $('#container1-17').droppable({
+  accept: '#div1-17',
+    drop: function() {
+    $('#div1-17').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div1-18').draggable();
+  $('#container1-18').droppable({
+  accept: '#div1-18',
+    drop: function() {
+    $('#div1-18').animate({top:"40px", left:"230px"});
+    }
+  });
+ }); 
+ 
+ $(document).ready(function( event, ui ) {
+  $('#div1-19').draggable();
+  $('#container1-19').droppable({
+  accept: '#div1-19',
+    drop: function() {
+    $('#div1-19').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+ 
+  $(document).ready(function( event, ui ) {
+  $('#div1-20').draggable();
+  $('#container1-20').droppable({
+  accept: '#div1-20',
+    drop: function() {
+    $('#div1-20').animate({top:"40px", left:"230px"});
+    }
+  });
+ });
+ 
+ 
+ 
+ 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-1').draggable();
+  $('#container2-1').droppable({
+  accept: '#div2-1',
+    drop: function() {
+    $('#div2-1').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-2').draggable();
+  $('#container2-2').droppable({
+  accept: '#div2-2',
+    drop: function() {
+    $('#div2-2').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-3').draggable();
+  $('#container2-3').droppable({
+  accept: '#div2-3',
+    drop: function() {
+    $('#div2-3').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-4').draggable();
+  $('#container2-4').droppable({
+  accept: '#div2-4',
+    drop: function() {
+    $('#div2-4').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-5').draggable();
+  $('#container2-5').droppable({
+  accept: '#div2-5',
+    drop: function() {
+    $('#div2-5').animate({top:"40px", left:"80px"});
+    }
+  });
+ }); 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-6').draggable();
+  $('#container2-6').droppable({
+  accept: '#div2-6',
+    drop: function() {
+    $('#div2-6').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-7').draggable();
+  $('#container2-7').droppable({
+  accept: '#div2-7',
+    drop: function() {
+    $('#div2-7').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-8').draggable();
+  $('#container2-8').droppable({
+  accept: '#div2-8',
+    drop: function() {
+    $('#div2-8').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-9').draggable();
+  $('#container2-9').droppable({
+  accept: '#div2-9',
+    drop: function() {
+    $('#div2-9').animate({top:"40px", left:"80px"});
+    }
+  });
+ }); 
+ 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-10').draggable();
+  $('#container2-10').droppable({
+  accept: '#div2-10',
+    drop: function() {
+    $('#div2-10').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-11').draggable();
+  $('#container2-11').droppable({
+  accept: '#div2-11',
+    drop: function() {
+    $('#div2-11').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-12').draggable();
+  $('#container2-12').droppable({
+  accept: '#div2-12',
+    drop: function() {
+    $('#div2-12').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-13').draggable();
+  $('#container2-13').droppable({
+  accept: '#div2-13',
+    drop: function() {
+    $('#div2-13').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-14').draggable();
+  $('#container2-14').droppable({
+  accept: '#div2-14',
+    drop: function() {
+    $('#div2-14').animate({top:"40px", left:"80px"});
+    }
+  });
+ }); 
+ 
+$(document).ready(function( event, ui ) {
+  $('#div2-15').draggable();
+  $('#container2-15').droppable({
+  accept: '#div2-15',
+    drop: function() {
+    $('#div2-15').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-16').draggable();
+  $('#container2-16').droppable({
+  accept: '#div2-16',
+    drop: function() {
+    $('#div2-16').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-17').draggable();
+  $('#container2-17').droppable({
+  accept: '#div2-17',
+    drop: function() {
+    $('#div2-17').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+$(document).ready(function( event, ui ) {
+  $('#div2-18').draggable();
+  $('#container2-18').droppable({
+  accept: '#div2-18',
+    drop: function() {
+    $('#div2-18').animate({top:"40px", left:"80px"});
+    }
+  });
+ }); 
+ 
+ $(document).ready(function( event, ui ) {
+  $('#div2-19').draggable();
+  $('#container2-19').droppable({
+  accept: '#div2-19',
+    drop: function() {
+    $('#div2-19').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+ 
+  $(document).ready(function( event, ui ) {
+  $('#div2-20').draggable();
+  $('#container2-20').droppable({
+  accept: '#div2-20',
+    drop: function() {
+    $('#div2-20').animate({top:"40px", left:"80px"});
+    }
+  });
+ });
+
+ 
+ 
+var nodeList = document.getElementsByClassName('draggable');
+ 
+  for(var i=0;i<nodeList.length;i++) {
+    var obj = nodeList[i];
+    obj.addEventListener('touchmove', function(event) {
+      var touch = event.targetTouches[0];
+      
+      // Place element where the finger is
+      event.target.style.left = touch.pageX + 'px';
+      event.target.style.top = touch.pageY + 'px';
+      event.preventDefault();
+    }, false);
+  } 
+  
+
+
+</script>
+
+</body>
+</html>

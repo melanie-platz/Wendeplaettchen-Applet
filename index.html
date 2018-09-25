@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+    <meta 
+     name='viewport' 
+      content='width=50px, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,' 
+     /> 
+  <title>Die Plättchen-App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+  <!-- 
+
+Created by Melanie Platz
+
+Refernces:
+* https://openclipart.org/
+* https://wiki.selfhtml.org/wiki/JavaScript/Tutorials/Drag_and_Drop
+* https://mobiforge.com/design-development/touch-friendly-drag-and-drop
+* https://stackoverflow.com/questions/50801496/how-to-move-an-drag-and-drop-item-to-a-certain-position-when-located-over-canva
+-->
+
+<style> 
+
+#App_b {
+  position: absolute;
+  width: 400px;
+  height: 283px;
+  left:50px;
+  top:0px;
+  background: url("Startseite_blau.png");
+}
+
+#App_b-r {
+  position: absolute;
+  width: 400px;
+  height: 283px;
+  left:450px;
+  top:0px;
+  background: url("Startseite_br.png");
+}
+
+#App_b-r-y {
+  position: absolute;
+  width: 400px;
+  height: 283px;
+  left:50px;
+  top:300px;
+  background: url("Startseite_brg.png");
+}
+
+#App_wp {
+  position: absolute;
+  width: 400px;
+  height: 283px;
+  left:450px;
+  top:300px;
+  background: url("Startseite_wp.png");
+}
+
+body {
+  position: relative;
+}
+
+</style>  
+  <title>Start</title>
+</head>
+
+<body>
+
+<div id="App_b" onClick="location.href='Blue.html';"></div>
+<div id="App_b-r" onClick="location.href='Blue-Red.html';"></div>
+<div id="App_b-r-y" onClick="location.href='Blue-Red-Yellow.html';"></div>
+<div id="App_wp" onClick="location.href='Wendeplaettchen.html';"></div>
+
+
+</body>
+</html>
